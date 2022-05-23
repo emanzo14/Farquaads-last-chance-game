@@ -19,7 +19,7 @@ ctx.height = map.height;
 //     ctx.drawImage(image,0,0)
 // };
 
-
+const gravity = 0.9;
    
     
    
@@ -33,27 +33,46 @@ class Crawler {
         this.height = height;
         this.width = width; 
         this.alive = true;
-        this.jumpHeight = 32;
-        this.jumping = true;
-        this.jumpCounter = 0;
+        this.jumping = false;
+        this.velocity ={
+            x: 0,
+            y: 0,
+        }
     }
 
     render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
-
+      
         
+    }
+    
+    update() {
+        this.render()
+        this.y += this.velocity.y;
+        if(this.y + this.height + this.velocity.y <= map.height)
+        this.velocity.y += gravity;
+        else this.velocity.y = 0
     }
 }
 
 
+let lord = new Crawler(596, 96, "red", 32, 32,);
+
+
+function animate() {
+    requestAnimationFrame(animate)
+    ctx.clearRect(0, 0, map.width, map. height)
+    lord.update()
+}
+animate();
 
 let shrek = new Crawler(650, 64, "green", 64, 64);
-let lord = new Crawler(596, 992, "red", 32, 32,);
-// lord.render(); 
 
-shrek.render();
-const runGame = setInterval(gameLoop, 120);
+
+
+
+// const runGame = setInterval(gameLoop, 120);
  
 
 function movementHandler(e){
@@ -61,17 +80,16 @@ function movementHandler(e){
 
     switch (e.key){
         case "ArrowLeft":
-            lord.x -= 20
-            // lord.x > 0 ? lord.x -= 10 : null;
+            lord.x > 32 ? lord.x -= 32 : null;
+            // 
             break
         case "ArrowRight":
-            lord.x += 20
-            // lord.x < (game.width - lord.width) ? lord.x += 10 : null;
+            lord.x < (map.width - 62) ? lord.x += 32 : null;
+            // lord.x 
             break  
         case "ArrowUp":
-            jump()
+            lord.y -= 96 * gravity
             break
-            
             
 
 
@@ -84,30 +102,10 @@ function movementHandler(e){
 
 
 
-function gameLoop(){
-    ctx.clearRect(0, 0, map.width, map. height)
-    lord.render();
-};
-
-let timesRun = 0;
-function jump() {
-    let timerUpId = setInterval( function (){
-        timesRun += 1;
-        if(timesRun === 16){
-            clearInterval(timerUpId);
-            let timerDownId = setInterval(function () {
-                timesRun += 1;
-            if(timesRun === 16){
-                clearInterval(timerDownId)
-            }
-                lord.y += 6;
-            }, 20)
-        }
-        lord.y -= 6;
-    }, 20 )
-    
-    
-}
+// function gameLoop(){
+//     ctx.clearRect(0, 0, map.width, map. height)
+//     lord.render();
+// };
 
 
 
