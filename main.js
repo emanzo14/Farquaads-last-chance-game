@@ -1,10 +1,11 @@
+window.addEventListener("DOMContentLoaded", function (){
 console.log("hello");
 
 const map = document.querySelector('canvas');
 const ctx = map.getContext("2d");
 console.log(map)
 
-map.setAttribute('width', '640');
+map.setAttribute('width', '800');
 map.setAttribute('height', '1120');
 
 ctx.width = map.width;
@@ -18,11 +19,11 @@ ctx.height = map.height;
 //     ctx.drawImage(image,0,0)
 // };
 
-// window.addEventListener("DOMContentLoaded", function (){
+
    
     
    
-// })
+
 
 class Crawler {
     constructor(x, y, color, width, height){
@@ -33,44 +34,88 @@ class Crawler {
         this.width = width; 
         this.alive = true;
         this.jumpHeight = 32;
-        this.canJump = false;
-        this.jusmpCounter = 0;
+        this.jumping = true;
+        this.jumpCounter = 0;
     }
 
     render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
+
+        
     }
 }
 
 
-let shrek = new Crawler(500, 64, "green", 64, 64);
-let lord = new Crawler(596, 996, "red", 32, 32,);
-lord.render(); 
+
+let shrek = new Crawler(650, 64, "green", 64, 64);
+let lord = new Crawler(596, 992, "red", 32, 32,);
+// lord.render(); 
 
 shrek.render();
-
+const runGame = setInterval(gameLoop, 120);
+ 
 
 function movementHandler(e){
     console.log("the key that was pressed was: " + e.key);
 
     switch (e.key){
-        case "w":
-            //jump
+        case "ArrowLeft":
+            lord.x -= 20
+            // lord.x > 0 ? lord.x -= 10 : null;
+            break
+        case "ArrowRight":
+            lord.x += 20
+            // lord.x < (game.width - lord.width) ? lord.x += 10 : null;
+            break  
+        case "ArrowUp":
+            jump()
+            break
+            
+            
 
-        case "a":
-            //left
+
         
-        case "d": 
-            //right
     }
-
+    console.log(lord)
 
 }
 
 
+
+
+function gameLoop(){
+    ctx.clearRect(0, 0, map.width, map. height)
+    lord.render();
+};
+
+let timesRun = 0;
+function jump() {
+    let timerUpId = setInterval( function (){
+        timesRun += 1;
+        if(timesRun === 16){
+            clearInterval(timerUpId);
+            let timerDownId = setInterval(function () {
+                timesRun += 1;
+            if(timesRun === 16){
+                clearInterval(timerDownId)
+            }
+                lord.y += 6;
+            }, 20)
+        }
+        lord.y -= 6;
+    }, 20 )
+    
+    
+}
+
+
+
+
+
+
+
+
 document.addEventListener("keydown", movementHandler);
 
-// function jump() {
-
-// }
+});
