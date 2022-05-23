@@ -50,6 +50,7 @@ class Crawler {
     update() {
         this.render()
         this.y += this.velocity.y;
+        this.x += this.velocity.x
         if(this.y + this.height + this.velocity.y <= map.height)
         this.velocity.y += gravity;
         else this.velocity.y = 0
@@ -80,18 +81,18 @@ function movementHandler(e){
 
     switch (e.key){
         case "ArrowLeft":
-            lord.x > 32 ? lord.x -= 32 : null;
-            // 
+            lord.x > 32 ? lord.velocity.x -= 3 : null;
+         
             break
         case "ArrowRight":
-            lord.x < (map.width - 62) ? lord.x += 32 : null;
-            // lord.x 
+            lord.x < (map.width - 62) ? lord.velocity.x += 3 : null;
+          
             break  
         case "ArrowUp":
-            lord.y -= 96 * gravity
+            lord.velocity.y -= 15
             break
             
-
+     
 
         
     }
@@ -115,5 +116,6 @@ function movementHandler(e){
 
 
 document.addEventListener("keydown", movementHandler);
+// document.addEventListener("keyup", movementHandler)
 
 });
