@@ -52,6 +52,7 @@ class Crawler {
     }
     
     update() {
+        
         this.render()
         this.y += this.velocity.y;
         this.x += this.velocity.x
@@ -62,14 +63,14 @@ class Crawler {
 }
 
 
-class Object {
+class Platform {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
         this.color = "rgba(0, 0, 255, 0.5)" ;
         this.width = width;
         this.height = height;
-       
+        
     }
     draw() {
     
@@ -77,37 +78,129 @@ class Object {
         ctx.fillRect(this.x, this.y, this.width, this.height,);
      
     }
+    updatePlatformForPlayer(){
+        if (lord.y + lord.height <= this.y && lord.y + lord.height + lord.velocity.y >= this.y && lord.x + lord.width >= this.x && lord.x <= this.x + this.width){
+            lord.velocity.y = 0
+        }
+    }
+    // updatePlatformForBarrel(){
+    //     if (lordFart.y + lordFart.height <= this.y && lordFart.y + lordFart.height + lordFart.velocity.y >= this.y && lordFart.x + lordFart.width >= this.x && lordFart.x <= this.x + this.width){
+    //         lordFart.cy = 0
+    //     }
+    // }
 }
 
-let platform_1 = new Object(224, 1024, 576, 96);
-let platform_2 = new Object(96, 992, 160, 128 );
-let platform_3 = new Object(0, 960, 128, 192);
-let platform_4 = new Object(128, 832, 672, 32);
-let platform_5 = new Object(0, 704, 576, 32);
-let platform_6 = new Object(0, 576, 160, 32);
-let platform_7 = new Object(224, 448, 96, 32);
-let platform_8 = new Object(352, 416, 96, 32);
-let platform_9 = new Object(480, 384, 96, 32);
-let platform_10 = new Object(640, 352, 160, 32);
-let platform_11 = new Object(0, 256, 544, 32);
-let platform_12 = new Object(224, 128, 160, 32);
-let platform_13 = new Object(384, 96, 448, 32);
-let platform_14 = new Object(640, 544, 160, 32);
+class Barrel {
+    constructor(){
+        this.x = 596;
+        this.y = 64;
+        this.width = 32;
+        this.height = 32;
+        this.velocity = {
+            x: 4,
+            y: 1,
+        }
+        this.cx = 1 * this.velocity.x;
+        this.cy = 1 * this.velocity.y;
+        this.alive = true;
+        
+    }
+    render(){
+        ctx.fillStyle = "blue";
+        ctx.fillRect(this.x, this.y, this.width, this.height,);
+    }
+   
+    updateBarrel(){
+        this.render()
+        this.x -= this.cx;
+        this.y += this.cy;
+        // condition to move left to right
+        if ((this.x + this.width ) > ctx.width){
+            this.cx = -this.cx
+        }
+        if (this.x < 0){
+            this.cx = -this.cx
+        }
+        //conditon to stop falling once it hits a platform
+        // if ((this.y + this.width) > 1120){
+        //     this.dy = -this.dy;
+        // }
+        // if (this.y < 0){
+        //     this.cy = -this.cy
+        if (this.y + this.height <= platform_4.y && this.y + this.height + this.cy >= platform_4.y && this.x + this.width >= platform_4.x && this.x <= platform_4.x + platform_4.width){
+                this.cy = 0
+            }
+            
+    }
+
+}
+// this.x + this.width >= platform_4.x && this.x <= platform_4.x - platform_4.width
+
+// class Object {
+//     constructor(x, y, color, width, height) {
+//         this.x = x;
+//         this.y = y;
+//         this.color = color;
+//         this.width = width;
+//         this.height = height;
+//         this.alive = true;
+//     }
+//     render() {
+//        ctx.fillStyle = this.color;
+//         ctx.fillRect(this.x, this.y, this.width, this.height,)
+//     }
+// }
+// let wallLeft = new Object(0, 0, "green", 20 ,1120)
+// let wallRight = new Object(780, 0, "green", 20, 1120)
+// console.log(wallLeft);
+// console.log(wallRight);
+
+let platform_1 = new Platform(224, 1024, 576, 96);
+let platform_2 = new Platform(96, 992, 160, 128 );
+let platform_3 = new Platform(0, 960, 128, 192);
+let platform_4 = new Platform(128, 832, 672, 32);
+let platform_5 = new Platform(0, 704, 576, 32);
+let platform_6 = new Platform(0, 576, 160, 32);
+let platform_7 = new Platform(224, 448, 96, 32);
+let platform_8 = new Platform(352, 416, 96, 32);
+let platform_9 = new Platform(480, 384, 96, 32);
+let platform_10 = new Platform(640, 352, 160, 32);
+let platform_11 = new Platform(0, 256, 544, 32);
+let platform_12 = new Platform(224, 128, 160, 32);
+let platform_13 = new Platform(384, 96, 448, 32);
+let platform_14 = new Platform(640, 544, 160, 32);
 
 
 
 
 let lord = new Crawler(596, 922, "red", 32, 32,);
-let lordFart = new Crawler(300, 96, "blue", 32, 32);
+let lordFart = new Barrel();
+let lordFart2 = new Barrel();
 
 function gameLoop() {
     ctx.clearRect(0, 0, map.width, map. height)
+   
 }
 
-function animate() {
-    requestAnimationFrame(animate)
+function mainLoop() {
+    requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
     lord.update();
+    platform_1.updatePlatformForPlayer();
+    platform_2.updatePlatformForPlayer();
+    platform_3.updatePlatformForPlayer();
+    platform_4.updatePlatformForPlayer();
+    platform_5.updatePlatformForPlayer();
+    platform_6.updatePlatformForPlayer();
+    platform_7.updatePlatformForPlayer();
+    platform_8.updatePlatformForPlayer();
+    platform_9.updatePlatformForPlayer();
+    platform_10.updatePlatformForPlayer();
+    platform_11.updatePlatformForPlayer();
+    platform_12.updatePlatformForPlayer();
+    platform_13.updatePlatformForPlayer();
+    platform_14.updatePlatformForPlayer();
+    
     platform_1.draw();
     platform_2.draw();
     platform_3.draw();
@@ -122,53 +215,84 @@ function animate() {
     platform_12.draw();
     platform_13.draw();
     platform_14.draw();
+    
+    
+    
+    
+    // wallLeft.render();
+    // wallRight.render();
+    
+    // if(lordFart.alive){
+    //     let hit = jamboy(lordFart, wallLeft);
 
-    // Platform collision detection 
-    if (lord.y + lord.height <= platform_1.y && lord.y + lord.height + lord.velocity.y >= platform_1.y && lord.x + lord.width >= platform_1.x && lord.x <= platform_1.x + platform_1.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_2.y && lord.y + lord.height + lord.velocity.y >= platform_2.y && lord.x + lord.width >= platform_2.x && lord.x <= platform_2.x + platform_2.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_3.y && lord.y + lord.height + lord.velocity.y >= platform_3.y && lord.x + lord.width >= platform_3.x && lord.x <= platform_3.x + platform_3.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_4.y && lord.y + lord.height + lord.velocity.y >= platform_4.y && lord.x + lord.width >= platform_4.x && lord.x <= platform_4.x + platform_4.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_5.y && lord.y + lord.height + lord.velocity.y >= platform_5.y && lord.x + lord.width >= platform_5.x && lord.x <= platform_5.x + platform_5.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_6.y && lord.y + lord.height + lord.velocity.y >= platform_6.y && lord.x + lord.width >= platform_6.x && lord.x <= platform_6.x + platform_6.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_7.y && lord.y + lord.height + lord.velocity.y >= platform_7.y && lord.x + lord.width >= platform_7.x && lord.x <= platform_7.x + platform_7.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_8.y && lord.y + lord.height + lord.velocity.y >= platform_8.y && lord.x + lord.width >= platform_8.x && lord.x <= platform_8.x + platform_8.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_9.y && lord.y + lord.height + lord.velocity.y >= platform_9.y && lord.x + lord.width >= platform_9.x && lord.x <= platform_9.x + platform_9.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_10.y && lord.y + lord.height + lord.velocity.y >= platform_10.y && lord.x + lord.width >= platform_10.x && lord.x <= platform_10.x + platform_10.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_11.y && lord.y + lord.height + lord.velocity.y >= platform_11.y && lord.x + lord.width >= platform_11.x && lord.x <= platform_11.x + platform_11.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_12.y && lord.y + lord.height + lord.velocity.y >= platform_12.y && lord.x + lord.width >= platform_12.x && lord.x <= platform_12.x + platform_12.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_13.y && lord.y + lord.height + lord.velocity.y >= platform_13.y && lord.x + lord.width >= platform_13.x && lord.x <= platform_13.x + platform_13.width){
-        lord.velocity.y = 0
-    }
-    if (lord.y + lord.height <= platform_14.y && lord.y + lord.height + lord.velocity.y >= platform_14.y && lord.x + lord.width >= platform_14.x && lord.x <= platform_14.x + platform_14.width){
-        lord.velocity.y = 0
-    }
-   
+    // };
+
+    
+  
+
 }
-animate();
+mainLoop();
+
+// function jamboy(p1,p2){
+//     let hitWall =
+
+//         p1.y + p1.height > p2.y &&
+//         p1.y < p2.y + p2.height &&
+//         p1.x + p1.width > p2.x &&
+//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+//     if (hitWall) {
+//         return lowerLevel();
+//         return spawnBarrel();
+
+
+//     } else {
+//         return false;
+//     }
+
+    
+
+
+// }
+// lordFart2.alive = false;
+// function lowerLevel(){
+//     lordFart.y = 226;
+//     lordFart2.alive = true;
+//     }
+// function spawnBarrel(){
+//     rollingBarrel();
+// }
+
+
+
+
+function rollingBarrel(){
+    requestAnimationFrame(rollingBarrel);
+    
+    
+    lordFart.updateBarrel();
+        // if(lordFart2.alive){
+        //     lordFart2.updateBarrel();
+        // }
+   
+   
+  
+    
+}
+rollingBarrel()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -193,7 +317,7 @@ function movementHandler(e){
 
         
     }
-    console.log(lord)
+    // console.log(lord)
 
 }
 
@@ -220,19 +344,6 @@ function movementHandlerOff(e){
 
 }
 
-// class Platform {
-//     constructor(x, y, width, height){
-//         this.x = x;
-//         this.y = y;
-//         this.width = width;
-//         this.height = height;
-
-//     }
-//     draw(){
-//         ctx.fillStyle = "blue";
-//         ctx.fillRect(this.x, this.y, this.width, this.height);
-//     }
-// }
 
 
 
