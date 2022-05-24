@@ -59,10 +59,12 @@ class Crawler {
         if(this.y + this.height + this.velocity.y <= map.height)
         this.velocity.y += gravity;
         else this.velocity.y = 0
+
+        
     }
+    
+
 }
-
-
 class Platform {
     constructor(x, y, width, height) {
         this.x = x;
@@ -83,11 +85,12 @@ class Platform {
             lord.velocity.y = 0
         }
     }
-    // updatePlatformForBarrel(){
-    //     if (lordFart.y + lordFart.height <= this.y && lordFart.y + lordFart.height + lordFart.velocity.y >= this.y && lordFart.x + lordFart.width >= this.x && lordFart.x <= this.x + this.width){
-    //         lordFart.cy = 0
-    //     }
-    // }
+    updatePlatformForBarrel(){
+        if (lordFart.y + lordFart.height <= this.y && lordFart.y + lordFart.height + lordFart.velocity.y >= this.y && lordFart.x + lordFart.width >= this.x && lordFart.x <= this.x + this.width){
+            lordFart.velocity.y = 0
+        }
+    }
+
 }
 
 class Barrel {
@@ -98,7 +101,7 @@ class Barrel {
         this.height = 32;
         this.velocity = {
             x: 4,
-            y: 1,
+            y: 2,
         }
         this.cx = 1 * this.velocity.x;
         this.cy = 1 * this.velocity.y;
@@ -112,48 +115,45 @@ class Barrel {
    
     updateBarrel(){
         this.render()
-        this.x -= this.cx;
-        this.y += this.cy;
+        this.x -= this.velocity.x;
+        // this.y += this.velocity.y;
         // condition to move left to right
         if ((this.x + this.width ) > ctx.width){
-            this.cx = -this.cx
+            this.velocity.x = -this.velocity.x
         }
         if (this.x < 0){
-            this.cx = -this.cx
+            this.velocity.x = -this.velocity.x
         }
-        //conditon to stop falling once it hits a platform
-        // if ((this.y + this.width) > 1120){
-        //     this.dy = -this.dy;
-        // }
-        // if (this.y < 0){
-        //     this.cy = -this.cy
-        if (this.y + this.height <= platform_4.y && this.y + this.height + this.cy >= platform_4.y && this.x + this.width >= platform_4.x && this.x <= platform_4.x + platform_4.width){
-                this.cy = 0
-            }
-            
+       
+        if(this.y + this.height <= platform_4.y && this.y + this.height + this.velocity.y >= platform_4.y && this.x + platform_4.width >= platform_4.x && this.x <= platform_4.x + platform_4.width){
+            this.velocity.y = 0
+        }
+
     }
 
 }
-// this.x + this.width >= platform_4.x && this.x <= platform_4.x - platform_4.width
+class Object {
+    constructor(x, y, color, width, height) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.width = width;
+        this.height = height;
+        this.alive = true;
+    }
+    render() {
+       ctx.fillStyle = this.color;
+       ctx.fillRect(this.x, this.y, this.width, this.height,)
+    }
+    
+}
 
-// class Object {
-//     constructor(x, y, color, width, height) {
-//         this.x = x;
-//         this.y = y;
-//         this.color = color;
-//         this.width = width;
-//         this.height = height;
-//         this.alive = true;
-//     }
-//     render() {
-//        ctx.fillStyle = this.color;
-//         ctx.fillRect(this.x, this.y, this.width, this.height,)
-//     }
-// }
-// let wallLeft = new Object(0, 0, "green", 20 ,1120)
-// let wallRight = new Object(780, 0, "green", 20, 1120)
-// console.log(wallLeft);
-// console.log(wallRight);
+let wallLeft = new Object(0, 0, "green", 2 ,1120)
+let wallRight = new Object(798, 0, "green", 2, 960)
+console.log(wallLeft);
+console.log(wallRight);
+
+
 
 let platform_1 = new Platform(224, 1024, 576, 96);
 let platform_2 = new Platform(96, 992, 160, 128 );
@@ -174,7 +174,7 @@ let platform_14 = new Platform(640, 544, 160, 32);
 
 
 let lord = new Crawler(596, 922, "red", 32, 32,);
-let lordFart = new Barrel();
+let lordFart = new Crawler(596, 64, "blue", 32, 32);
 let lordFart2 = new Barrel();
 
 function gameLoop() {
@@ -186,6 +186,7 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
     lord.update();
+    lordFart.update()
     platform_1.updatePlatformForPlayer();
     platform_2.updatePlatformForPlayer();
     platform_3.updatePlatformForPlayer();
@@ -200,7 +201,25 @@ function mainLoop() {
     platform_12.updatePlatformForPlayer();
     platform_13.updatePlatformForPlayer();
     platform_14.updatePlatformForPlayer();
+
+    platform_1.updatePlatformForBarrel();
+    platform_2.updatePlatformForBarrel();
+    platform_3.updatePlatformForBarrel();
+    platform_4.updatePlatformForBarrel();
+    platform_5.updatePlatformForBarrel();
+    platform_6.updatePlatformForBarrel();
+    platform_7.updatePlatformForBarrel();
+    platform_8.updatePlatformForBarrel();
+    platform_9.updatePlatformForBarrel();
+    platform_10.updatePlatformForBarrel();
+    platform_11.updatePlatformForBarrel();
+    platform_12.updatePlatformForBarrel();
+    platform_13.updatePlatformForBarrel();
+    platform_14.updatePlatformForBarrel();
+
+
     
+
     platform_1.draw();
     platform_2.draw();
     platform_3.draw();
@@ -219,40 +238,58 @@ function mainLoop() {
     
     
     
-    // wallLeft.render();
-    // wallRight.render();
+    wallLeft.render();
+    wallRight.render();
     
-    // if(lordFart.alive){
-    //     let hit = jamboy(lordFart, wallLeft);
+    if(lordFart.alive){
+        let hit = hitWallLeft(lordFart, wallLeft);
 
-    // };
+    };
 
+    if(lordFart.alive){
+        let hit = hitWallRight(lordFart, wallRight);
+
+    };
     
   
 
 }
 mainLoop();
 
-// function jamboy(p1,p2){
-//     let hitWall =
+function hitWallLeft(p1,p2){
+    let hitWall =
 
-//         p1.y + p1.height > p2.y &&
-//         p1.y < p2.y + p2.height &&
-//         p1.x + p1.width > p2.x &&
-//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
-//     if (hitWall) {
-//         return lowerLevel();
-//         return spawnBarrel();
-
-
-//     } else {
-//         return false;
-//     }
-
-    
+    if (hitWall) {
+        return rollingBarrelRight(lordFart);
+        
 
 
+    } else {
+        return false;
+    }   
+}
+function hitWallRight(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft(lordFart);
+        
+
+
+    } else {
+        return false;
+    }   
+}
 // }
 // lordFart2.alive = false;
 // function lowerLevel(){
@@ -266,20 +303,32 @@ mainLoop();
 
 
 
-function rollingBarrel(){
-    requestAnimationFrame(rollingBarrel);
-    
-    
-    lordFart.updateBarrel();
-        // if(lordFart2.alive){
-        //     lordFart2.updateBarrel();
-        // }
-   
-   
+
+
+
+
+
+
+function rollingBarrelLeft(e){
   
-    
+        
+        // condition to move left to right
+        if ((e.x + e.width ) > 0){
+            e.velocity.x = - 5 
+        }
+   
 }
-rollingBarrel()
+
+function rollingBarrelRight(e) {
+
+    if (e.x > 0){
+        e.velocity.x = +5
+    }
+}
+
+
+
+rollingBarrelLeft(lordFart)
 
 
 
