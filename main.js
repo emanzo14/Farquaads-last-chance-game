@@ -66,7 +66,7 @@ class Object {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
-        this.color = "rgba(0, 0, 255, 0.6)" ;
+        this.color = "rgba(0, 0, 255, 0.5)" ;
         this.width = width;
         this.height = height;
        
@@ -80,11 +80,15 @@ class Object {
 }
 
 let platform_1 = new Object(224, 1024, 576, 96);
-let platform_2 = new Object(96, 992, 160, 128 )
+let platform_2 = new Object(96, 992, 160, 128 );
+let platform_3 = new Object(0, 960, 128, 192);
+let platform_4 = new Object(128, 832, 672, 32);
+let platform_5 = new Object(0, 704, 576, 32);
+let platform_6 = new Object(0, 576, 160, 32);
 
 
 
-let lord = new Crawler(596, 96, "red", 32, 32,);
+let lord = new Crawler(596, 922, "red", 32, 32,);
 let lordFart = new Crawler(300, 96, "blue", 32, 32);
 
 function gameLoop() {
@@ -97,11 +101,27 @@ function animate() {
     lord.update();
     platform_1.draw();
     platform_2.draw();
+    platform_3.draw();
+    platform_4.draw();
+    platform_5.draw();
+    platform_6.draw();
     
     if (lord.y + lord.height <= platform_1.y && lord.y + lord.height + lord.velocity.y >= platform_1.y && lord.x + lord.width >= platform_1.x && lord.x <= platform_1.x + platform_1.width){
         lord.velocity.y = 0
     }
     if (lord.y + lord.height <= platform_2.y && lord.y + lord.height + lord.velocity.y >= platform_2.y && lord.x + lord.width >= platform_2.x && lord.x <= platform_2.x + platform_2.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_3.y && lord.y + lord.height + lord.velocity.y >= platform_3.y && lord.x + lord.width >= platform_3.x && lord.x <= platform_3.x + platform_3.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_4.y && lord.y + lord.height + lord.velocity.y >= platform_4.y && lord.x + lord.width >= platform_4.x && lord.x <= platform_4.x + platform_4.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_5.y && lord.y + lord.height + lord.velocity.y >= platform_5.y && lord.x + lord.width >= platform_5.x && lord.x <= platform_5.x + platform_5.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_6.y && lord.y + lord.height + lord.velocity.y >= platform_6.y && lord.x + lord.width >= platform_6.x && lord.x <= platform_6.x + platform_6.width){
         lord.velocity.y = 0
     }
    
