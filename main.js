@@ -89,8 +89,10 @@ let platform_7 = new Object(224, 448, 96, 32);
 let platform_8 = new Object(352, 416, 96, 32);
 let platform_9 = new Object(480, 384, 96, 32);
 let platform_10 = new Object(640, 352, 160, 32);
-let platform_11 = new Object(0, 256, 576, 32);
-let platform_12 = new Object(256, 128, 576, 32);
+let platform_11 = new Object(0, 256, 544, 32);
+let platform_12 = new Object(224, 128, 160, 32);
+let platform_13 = new Object(384, 96, 448, 32);
+let platform_14 = new Object(640, 544, 160, 32);
 
 
 
@@ -118,7 +120,9 @@ function animate() {
     platform_10.draw();
     platform_11.draw();
     platform_12.draw();
-    
+    platform_13.draw();
+    platform_14.draw();
+
     // Platform collision detection 
     if (lord.y + lord.height <= platform_1.y && lord.y + lord.height + lord.velocity.y >= platform_1.y && lord.x + lord.width >= platform_1.x && lord.x <= platform_1.x + platform_1.width){
         lord.velocity.y = 0
@@ -154,6 +158,12 @@ function animate() {
         lord.velocity.y = 0
     }
     if (lord.y + lord.height <= platform_12.y && lord.y + lord.height + lord.velocity.y >= platform_12.y && lord.x + lord.width >= platform_12.x && lord.x <= platform_12.x + platform_12.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_13.y && lord.y + lord.height + lord.velocity.y >= platform_13.y && lord.x + lord.width >= platform_13.x && lord.x <= platform_13.x + platform_13.width){
+        lord.velocity.y = 0
+    }
+    if (lord.y + lord.height <= platform_14.y && lord.y + lord.height + lord.velocity.y >= platform_14.y && lord.x + lord.width >= platform_14.x && lord.x <= platform_14.x + platform_14.width){
         lord.velocity.y = 0
     }
    
@@ -237,4 +247,6 @@ function movementHandlerOff(e){
 
 document.addEventListener("keydown", movementHandler);
 document.addEventListener("keyup", movementHandlerOff)
+
+
 
