@@ -1,9 +1,9 @@
-window.addEventListener("DOMContentLoaded", function (e){
-    const runGame = setInterval(gameLoop, 120)
+// window.addEventListener("DOMContentLoaded", function (e){
+//     const runGame = setInterval(gameLoop, 120)
 
 
-});
-console.log("hello");
+// });
+// console.log("hello");
 
 const map = document.querySelector('canvas');
 const ctx = map.getContext("2d");
@@ -85,10 +85,7 @@ class Crawler {
         }
         
         update() {
-            setInterval(() => {
-                this.render()
-            }, 3000);
-            
+           
             this.render()
             this.y += this.velocity.y;
             this.x += this.velocity.x
@@ -171,8 +168,8 @@ class Object {
     
 }
 
-let wallLeft = new Object(0, 0, "green", 2 ,1120)
-let wallRight = new Object(798, 0, "green", 2, 960)
+let wallLeft = new Object(0, 0, "green", 20 ,1120)
+let wallRight = new Object(798, 0, "green", 20, 960)
 
 
 
@@ -194,17 +191,21 @@ let platform_14 = new Platform(640, 544, 160, 32);
 
 //Create my players and barrels
 
-let lord = new Crawler(596, 922, "red", 32, 32) 
+let lord = new Crawler(596, 922, "red", 32, 32);
 let lordFart = new Crawler(764, 64, "yellow", 32, 32);
-let barrel2 = new Crawler(732, 512, "green", 32, 32 )
-let barrel3 = new Barrel(764, 64)
-let barrel4 = new Barrel(764, 64)
-let barrel5 = new Barrel(764, 64)
-let barrel6 = new Barrel(764, 64)
-function gameLoop() {
-    ctx.clearRect(0, 0, map.width, map. height)
+let barrel2 = new Crawler(732, 512, "green", 32, 32 );
+let barrel3 = new Barrel(764, 64);
+let barrel4 = new Barrel(764, 64);
+let barrel5 = new Barrel(764, 64);
+let barrel6 = new Barrel(764, 64);
+
+
+const myBarrels =[lordFart, barrel2, barrel3, barrel4, barrel5, barrel6];
+
+// function gameLoop() {
+//     ctx.clearRect(0, 0, map.width, map. height)
    
-}
+// }
 
 function mainLoop() {
     requestAnimationFrame(mainLoop)
@@ -352,15 +353,7 @@ function mainLoop() {
         let hit = hitWallRight(lordFart, wallRight);
 
     };
-    if(barrel2.alive){
-        let hit = hitWallLeft(barrel2, wallLeft);
-
-    };
-
-    if(barrel2.alive){
-        let hit = hitWallRight(barrel2, wallRight);
-
-    };
+  
     
     
   
@@ -404,41 +397,7 @@ function hitWallRight(p1,p2){
     }   
 }
 // Barrel 2 boolean hit detection
-function hitWallLeft2(p1,p2){
-    let hitWall =
 
-        p1.y + p1.height > p2.y &&
-        p1.y < p2.y + p2.height &&
-        p1.x + p1.width > p2.x &&
-        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
-
-    if (hitWall) {
-        return rollingBarrelRight(barrel2);
-        
-        
-
-    } else {
-        return false;
-    }   
-}
-function hitWallRight2(p1,p2){
-    let hitWall =
-
-        p1.y + p1.height > p2.y &&
-        p1.y < p2.y + p2.height &&
-        p1.x + p1.width > p2.x &&
-        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
-
-    if (hitWall) {
-        return rollingBarrelLeft(barrel2);
-        
-        
-
-
-    } else {
-        return false;
-    }   
-}
 
 
 
@@ -463,7 +422,7 @@ function barrelLoop() {
 function rollingBarrelLeft(e){
   
         
-        // condition to move left to right
+        // condition to move left to left
         if ((e.x + e.width ) > 0){
             e.velocity.x = - 5 
         }
@@ -472,6 +431,7 @@ function rollingBarrelLeft(e){
 
 function rollingBarrelRight(e) {
     
+    // condition to move left to right
     if (e.x > 0){
         e.velocity.x = +5
     }
@@ -574,3 +534,5 @@ document.addEventListener("keyup", movementHandlerOff)
 
 
 
+////next steps to do ********** 
+    //create function with two parameters, one being the player the other the barrels who collide with the player block, create function to detect hit boxes and end game.
