@@ -194,7 +194,7 @@ let platform_14 = new Platform(640, 544, 160, 32);
 
 let lord = new Crawler(596, 922, "red", 32, 32);
 let lordFart = new Crawler(764, 64, "blue", 32, 32);
-let barrel2 = new Crawler(732, 512, "green", 32, 32 );
+let barrel2 = new Crawler(732, 512, "yellow", 32, 32 );
 let barrel3 = new Barrel(764, 64);
 let barrel4 = new Barrel(764, 64);
 let barrel5 = new Barrel(764, 64);
@@ -349,9 +349,25 @@ function mainLoop() {
     barrelLoop_5();
     barrelLoop_6();
 
-    
+//***** hit conditions for winning and losing *******    
+
     if(lord.alive){
         let hit = hitPlayer(lord, lordFart);
+    }
+    if(lord.alive){
+        let hit = hitPlayer(lord, barrel2);
+    }
+    if(lord.alive){
+        let hit = hitPlayer(lord, barrel3);
+    }
+    if(lord.alive){
+        let hit = hitPlayer(lord, barrel4);
+    }
+    if(lord.alive){
+        let hit = hitPlayer(lord, barrel5);
+    }
+    if(lord.alive){
+        let hit = hitPlayer(lord, barrel6);
     }
 
     if(shrek.alive){
@@ -359,16 +375,19 @@ function mainLoop() {
     }
 
     
+//***** hit conditions for barrels hitting walls *******
+
+//barrel 1
     if(lordFart.alive){
         let hit = hitWallLeft(lordFart, wallLeft);
 
     };
-
     if(lordFart.alive){
         let hit = hitWallRight(lordFart, wallRight);
 
     };
 
+//barrel 2
     if(barrel2.alive){
         let hit = hitWallLeft_2(barrel2, wallLeft);
 
@@ -379,35 +398,39 @@ function mainLoop() {
 
     };
 
+//barrel 3
     if(barrel3.alive){
         let hit = hitWallLeft_3(barrel3, wallLeft);
 
     };
-
     if(barrel3.alive){
         let hit = hitWallRight_3(barrel3, wallRight);
 
     };
+
+//barrel 4
     if(barrel4.alive){
         let hit = hitWallLeft_4(barrel4, wallLeft);
 
     };
-
     if(barrel4.alive){
         let hit = hitWallRight_4(barrel4, wallRight);
 
     };
-    if(barrel4.alive){
-        let hit = hitWallLeft_4(barrel4, wallLeft);
+
+//barrel 5
+    if(barrel5.alive){
+        let hit = hitWallLeft_5(barrel5, wallLeft);
 
     };
-
     if(barrel5.alive){
         let hit = hitWallRight_5(barrel5, wallRight);
 
     };
-    if(barrel5.alive){
-        let hit = hitWallLeft_5(barrel5, wallLeft);
+
+//barrel 6
+    if(barrel6.alive){
+        let hit = hitWallLeft_6(barrel6, wallLeft);
 
     };
 
@@ -418,10 +441,13 @@ function mainLoop() {
   
     
     
-  
 
 }
 mainLoop();
+
+// ********* functions to detect wall hit and to declare what is to happen
+
+
 // Barrel 1 boolean detection 
 function hitWallLeft(p1,p2){
     let hitWall =
@@ -433,9 +459,7 @@ function hitWallLeft(p1,p2){
 
     if (hitWall) {
         return rollingBarrelRight();
-        
-        
-
+    
     } else {
         return false;
     }   
@@ -451,14 +475,11 @@ function hitWallRight(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft();
         
-        
-
-
     } else {
         return false;
     }   
 }
-// Barrel 2 boolean hit detection
+// Barrel 2 hit detection
 function hitWallLeft_2(p1,p2){
     let hitWall =
 
@@ -469,9 +490,7 @@ function hitWallLeft_2(p1,p2){
 
     if (hitWall) {
         return rollingBarrelRight_2();
-        
-        
-
+    
     } else {
         return false;
     }   
@@ -487,14 +506,12 @@ function hitWallRight_2(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft_2();
         
-        
-
-
     } else {
         return false;
     }   
 }
 
+// Barrel 3 hit detection
 function hitWallLeft_3(p1,p2){
     let hitWall =
 
@@ -506,8 +523,6 @@ function hitWallLeft_3(p1,p2){
     if (hitWall) {
         return rollingBarrelRight_3();
         
-        
-
     } else {
         return false;
     }   
@@ -523,14 +538,12 @@ function hitWallRight_3(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft_3();
         
-        
-
-
     } else {
         return false;
     }   
 }
 
+// Barrel 4 hit detection
 function hitWallLeft_4(p1,p2){
     let hitWall =
 
@@ -542,8 +555,6 @@ function hitWallLeft_4(p1,p2){
     if (hitWall) {
         return rollingBarrelRight_4();
         
-        
-
     } else {
         return false;
     }   
@@ -559,14 +570,12 @@ function hitWallRight_4(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft_4();
         
-        
-
-
     } else {
         return false;
     }   
 }
 
+// Barrel 5 hit detection
 function hitWallLeft_5(p1,p2){
     let hitWall =
 
@@ -578,8 +587,6 @@ function hitWallLeft_5(p1,p2){
     if (hitWall) {
         return rollingBarrelRight_5();
         
-        
-
     } else {
         return false;
     }   
@@ -595,14 +602,12 @@ function hitWallRight_5(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft_5();
         
-        
-
-
     } else {
         return false;
     }   
 }
 
+// Barrel 6 hit detection
 function hitWallLeft_6(p1,p2){
     let hitWall =
 
@@ -614,12 +619,11 @@ function hitWallLeft_6(p1,p2){
     if (hitWall) {
         return rollingBarrelRight_6();
         
-        
-
     } else {
         return false;
     }   
 }
+
 function hitWallRight_6(p1,p2){
     let hitWall =
 
@@ -630,15 +634,13 @@ function hitWallRight_6(p1,p2){
 
     if (hitWall) {
         return rollingBarrelLeft_6();
-        
-        
-
 
     } else {
         return false;
     }   
 }
 
+//********** functions to determine lose conditions
 
 function hitPlayer(p1, p2){
     let hitBarrel =
@@ -653,7 +655,6 @@ function hitPlayer(p1, p2){
         lord.alive = false;
         location.reload();
         console.log("you died", hitBarrel)
-
 
     } else {
         return true;
@@ -688,7 +689,7 @@ function youWin(p1, p2){
 function barrelLoop() {
     if (lordFart.y > 1088){
         lordFart.y = 64;
-        lordFart.x = 596;
+        lordFart.x = 764;
     }
     
 }
@@ -913,21 +914,8 @@ function movementHandlerOff(e){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener("keydown", movementHandler);
 document.addEventListener("keyup", movementHandlerOff)
 
 
 
-////next steps to do ********** 
-    //create function with two parameters, one being the player the other the barrels who collide with the player block, create function to detect hit boxes and end game.
