@@ -62,6 +62,42 @@ class Crawler {
 
         
     }
+}
+    class Barrel {
+        constructor(x, y,){
+            this.x = x;
+            this.y = y;
+            this.color = "yellow";
+            this.height = 32;
+            this.width = 32; 
+            this.alive = true;
+            this.velocity = {
+                x: 0,
+                y: 0,
+            }
+        }
+    
+        render() {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.width, this.height)
+          
+            
+        }
+        
+        update() {
+            setInterval(() => {
+                this.render()
+            }, 3000);
+            
+            this.render()
+            this.y += this.velocity.y;
+            this.x += this.velocity.x
+            if(this.y + this.height + this.velocity.y <= map.height)
+            this.velocity.y += gravity;
+            else this.velocity.y = 0
+    
+            
+        }
     
 
 }
@@ -90,48 +126,35 @@ class Platform {
             lordFart.velocity.y = 0
         }
     }
-
-}
-
-class Barrel {
-    constructor(){
-        this.x = 596;
-        this.y = 64;
-        this.width = 32;
-        this.height = 32;
-        this.velocity = {
-            x: 4,
-            y: 2,
+    updatePlatformForBarrel2(){
+        if (barrel2.y + barrel2.height <= this.y && barrel2.y + barrel2.height + barrel2.velocity.y >= this.y && barrel2.x + barrel2.width >= this.x && barrel2.x <= this.x + this.width){
+            barrel2.velocity.y = 0
         }
-        this.cx = 1 * this.velocity.x;
-        this.cy = 1 * this.velocity.y;
-        this.alive = true;
-        
     }
-    render(){
-        ctx.fillStyle = "blue";
-        ctx.fillRect(this.x, this.y, this.width, this.height,);
+    updatePlatformForBarrel3(){
+        if (barrel3.y + barrel3.height <= this.y && barrel3.y + barrel3.height + barrel3.velocity.y >= this.y && barrel3.x + barrel3.width >= this.x && barrel3.x <= this.x + this.width){
+            barrel3.velocity.y = 0
+        }
     }
-   
-    updateBarrel(){
-        this.render()
-        this.x -= this.velocity.x;
-        // this.y += this.velocity.y;
-        // condition to move left to right
-        if ((this.x + this.width ) > ctx.width){
-            this.velocity.x = -this.velocity.x
+    updatePlatformForBarrel4(){
+        if (barrel4.y + barrel4.height <= this.y && barrel4.y + barrel4.height + barrel4.velocity.y >= this.y && barrel4.x + barrel4.width >= this.x && barrel4.x <= this.x + this.width){
+            barrel4.velocity.y = 0
         }
-        if (this.x < 0){
-            this.velocity.x = -this.velocity.x
+    }
+    updatePlatformForBarrel5(){
+        if (barrel5.y + barrel5.height <= this.y && barrel5.y + barrel5.height + barrel5.velocity.y >= this.y && barrel5.x + barrel5.width >= this.x && barrel5.x <= this.x + this.width){
+            barrel5.velocity.y = 0
         }
-       
-        if(this.y + this.height <= platform_4.y && this.y + this.height + this.velocity.y >= platform_4.y && this.x + platform_4.width >= platform_4.x && this.x <= platform_4.x + platform_4.width){
-            this.velocity.y = 0
+    }
+    updatePlatformForBarrel6(){
+        if (barrel6.y + barrel6.height <= this.y && barrel6.y + barrel6.height + barrel6.velocity.y >= this.y && barrel6.x + barrel6.width >= this.x && barrel6.x <= this.x + this.width){
+            barrel6.velocity.y = 0
         }
-
     }
 
 }
+
+
 class Object {
     constructor(x, y, color, width, height) {
         this.x = x;
@@ -150,8 +173,6 @@ class Object {
 
 let wallLeft = new Object(0, 0, "green", 2 ,1120)
 let wallRight = new Object(798, 0, "green", 2, 960)
-console.log(wallLeft);
-console.log(wallRight);
 
 
 
@@ -171,12 +192,15 @@ let platform_13 = new Platform(384, 96, 448, 32);
 let platform_14 = new Platform(640, 544, 160, 32);
 
 
+//Create my players and barrels
 
-
-let lord = new Crawler(596, 922, "red", 32, 32,);
-let lordFart = new Crawler(596, 64, "blue", 32, 32);
-let lordFart2 = new Barrel();
-
+let lord = new Crawler(596, 922, "red", 32, 32) 
+let lordFart = new Crawler(764, 64, "yellow", 32, 32);
+let barrel2 = new Crawler(732, 512, "green", 32, 32 )
+let barrel3 = new Barrel(764, 64)
+let barrel4 = new Barrel(764, 64)
+let barrel5 = new Barrel(764, 64)
+let barrel6 = new Barrel(764, 64)
 function gameLoop() {
     ctx.clearRect(0, 0, map.width, map. height)
    
@@ -186,7 +210,12 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
     lord.update();
-    lordFart.update()
+    lordFart.update();
+    barrel2.update();
+    barrel3.update();
+    barrel4.update();
+    barrel5.update();
+    barrel6.update();
     platform_1.updatePlatformForPlayer();
     platform_2.updatePlatformForPlayer();
     platform_3.updatePlatformForPlayer();
@@ -201,7 +230,7 @@ function mainLoop() {
     platform_12.updatePlatformForPlayer();
     platform_13.updatePlatformForPlayer();
     platform_14.updatePlatformForPlayer();
-
+    //barrel 1 platform hit detection
     platform_1.updatePlatformForBarrel();
     platform_2.updatePlatformForBarrel();
     platform_3.updatePlatformForBarrel();
@@ -216,6 +245,81 @@ function mainLoop() {
     platform_12.updatePlatformForBarrel();
     platform_13.updatePlatformForBarrel();
     platform_14.updatePlatformForBarrel();
+    ////barrel 2 platform hit detection
+    platform_1.updatePlatformForBarrel2();
+    platform_2.updatePlatformForBarrel2();
+    platform_3.updatePlatformForBarrel2();
+    platform_4.updatePlatformForBarrel2();
+    platform_5.updatePlatformForBarrel2();
+    platform_6.updatePlatformForBarrel2();
+    platform_7.updatePlatformForBarrel2();
+    platform_8.updatePlatformForBarrel2();
+    platform_9.updatePlatformForBarrel2();
+    platform_10.updatePlatformForBarrel2();
+    platform_11.updatePlatformForBarrel2();
+    platform_12.updatePlatformForBarrel2();
+    platform_13.updatePlatformForBarrel2();
+    platform_14.updatePlatformForBarrel2();
+    ////barrel 3 platform hit detection
+    platform_1.updatePlatformForBarrel3();
+    platform_2.updatePlatformForBarrel3();
+    platform_3.updatePlatformForBarrel3();
+    platform_4.updatePlatformForBarrel3()
+    platform_5.updatePlatformForBarrel3();
+    platform_6.updatePlatformForBarrel3();
+    platform_7.updatePlatformForBarrel3();
+    platform_8.updatePlatformForBarrel3();
+    platform_9.updatePlatformForBarrel3();
+    platform_10.updatePlatformForBarrel3();
+    platform_11.updatePlatformForBarrel3();
+    platform_12.updatePlatformForBarrel3();
+    platform_13.updatePlatformForBarrel3();
+    platform_14.updatePlatformForBarrel3();
+    ////barrel 4 platform hit detection
+    platform_1.updatePlatformForBarrel4();
+    platform_2.updatePlatformForBarrel4();
+    platform_3.updatePlatformForBarrel4();
+    platform_4.updatePlatformForBarrel4()
+    platform_5.updatePlatformForBarrel4();
+    platform_6.updatePlatformForBarrel4();
+    platform_7.updatePlatformForBarrel4();
+    platform_8.updatePlatformForBarrel4();
+    platform_9.updatePlatformForBarrel4();
+    platform_10.updatePlatformForBarrel4();
+    platform_11.updatePlatformForBarrel4();
+    platform_12.updatePlatformForBarrel4();
+    platform_13.updatePlatformForBarrel4();
+    platform_14.updatePlatformForBarrel4();
+    ////barrel 5 platform hit detection
+    platform_1.updatePlatformForBarrel5();
+    platform_2.updatePlatformForBarrel5();
+    platform_3.updatePlatformForBarrel5();
+    platform_4.updatePlatformForBarrel5()
+    platform_5.updatePlatformForBarrel5();
+    platform_6.updatePlatformForBarrel5();
+    platform_7.updatePlatformForBarrel5();
+    platform_8.updatePlatformForBarrel5();
+    platform_9.updatePlatformForBarrel5();
+    platform_10.updatePlatformForBarrel5();
+    platform_11.updatePlatformForBarrel5();
+    platform_12.updatePlatformForBarrel5();
+    platform_13.updatePlatformForBarrel5();
+    platform_14.updatePlatformForBarrel5();
+    ////barrel 6 platform hit detection
+    platform_1.updatePlatformForBarrel6();
+    platform_2.updatePlatformForBarrel6();
+    platform_3.updatePlatformForBarrel6();
+    platform_4.updatePlatformForBarrel6()
+    platform_5.updatePlatformForBarrel6();
+    platform_6.updatePlatformForBarrel6();
+    platform_7.updatePlatformForBarrel6();
+    platform_8.updatePlatformForBarrel6();
+    platform_9.updatePlatformForBarrel6();
+    platform_10.updatePlatformForBarrel6();
+    platform_11.updatePlatformForBarrel6();
+    platform_12.updatePlatformForBarrel6();
+    platform_13.updatePlatformForBarrel6();
+    platform_14.updatePlatformForBarrel6();
 
 
     
@@ -235,11 +339,9 @@ function mainLoop() {
     platform_13.draw();
     platform_14.draw();
     
-    
-    
-    
-    wallLeft.render();
-    wallRight.render();
+    barrelLoop();
+    // barrelLoop2();
+
     
     if(lordFart.alive){
         let hit = hitWallLeft(lordFart, wallLeft);
@@ -250,12 +352,22 @@ function mainLoop() {
         let hit = hitWallRight(lordFart, wallRight);
 
     };
+    if(barrel2.alive){
+        let hit = hitWallLeft(barrel2, wallLeft);
+
+    };
+
+    if(barrel2.alive){
+        let hit = hitWallRight(barrel2, wallRight);
+
+    };
+    
     
   
 
 }
 mainLoop();
-
+// Barrel 1 boolean detection 
 function hitWallLeft(p1,p2){
     let hitWall =
 
@@ -267,7 +379,7 @@ function hitWallLeft(p1,p2){
     if (hitWall) {
         return rollingBarrelRight(lordFart);
         
-
+        
 
     } else {
         return false;
@@ -284,28 +396,67 @@ function hitWallRight(p1,p2){
     if (hitWall) {
         return rollingBarrelLeft(lordFart);
         
+        
 
 
     } else {
         return false;
     }   
 }
-// }
-// lordFart2.alive = false;
-// function lowerLevel(){
-//     lordFart.y = 226;
-//     lordFart2.alive = true;
+// Barrel 2 boolean hit detection
+function hitWallLeft2(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelRight(barrel2);
+        
+        
+
+    } else {
+        return false;
+    }   
+}
+function hitWallRight2(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft(barrel2);
+        
+        
+
+
+    } else {
+        return false;
+    }   
+}
+
+
+
+
+
+function barrelLoop() {
+    if (lordFart.y > 1088){
+        lordFart.y = 64;
+        lordFart.x = 596;
+    }
+    
+}
+// function barrelLoop2(){
+//     if (barrel2.y > 1088){
+//         barrel2.y = 532;
+//         barrel2.x = 800;
 //     }
-// function spawnBarrel(){
-//     rollingBarrel();
 // }
-
-
-
-
-
-
-
 
 
 
@@ -320,17 +471,30 @@ function rollingBarrelLeft(e){
 }
 
 function rollingBarrelRight(e) {
-
+    
     if (e.x > 0){
         e.velocity.x = +5
     }
+ 
 }
 
 
 
 rollingBarrelLeft(lordFart)
+rollingBarrelLeft(barrel2)
 
-
+setTimeout(() => {
+    rollingBarrelLeft(barrel3)
+}, 3000);
+setTimeout(() => {
+    rollingBarrelLeft(barrel4)
+}, 6000);
+setTimeout(() => {
+    rollingBarrelLeft(barrel5)
+}, 9000);
+setTimeout(() => {
+    rollingBarrelLeft(barrel6)
+}, 11000);
 
 
 
