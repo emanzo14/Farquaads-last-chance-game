@@ -1,9 +1,3 @@
-// window.addEventListener("DOMContentLoaded", function (e){
-//     const runGame = setInterval(gameLoop, 120)
-
-
-// });
-// console.log("hello");
 
 const map = document.querySelector('canvas');
 const ctx = map.getContext("2d");
@@ -200,13 +194,6 @@ let barrel4 = new Barrel(764, 64);
 let barrel5 = new Barrel(764, 64);
 let barrel6 = new Barrel(764, 64);
 
-
-const myBarrels =[lordFart, barrel2, barrel3, barrel4, barrel5, barrel6];
-
-// function gameLoop() {
-//     ctx.clearRect(0, 0, map.width, map. height)
-   
-// }
 
 function mainLoop() {
     requestAnimationFrame(mainLoop)
@@ -640,7 +627,7 @@ function hitWallRight_6(p1,p2){
     }   
 }
 
-//********** functions to determine lose conditions
+//********** functions to determine lose conditions **********
 
 function hitPlayer(p1, p2){
     let hitBarrel =
@@ -729,7 +716,7 @@ function barrelLoop_6(){
 function rollingBarrelLeft(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((lordFart.x + lordFart.width ) > 0){
             lordFart.velocity.x = - 5 
         }
@@ -738,7 +725,7 @@ function rollingBarrelLeft(){
 
 function rollingBarrelRight() {
     
-    // condition to move left to right
+    // condition to move right
     if (lordFart.x > 0){
         lordFart.velocity.x = +5
     }
@@ -747,7 +734,7 @@ function rollingBarrelRight() {
 function rollingBarrelLeft_2(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((barrel2.x + barrel2.width ) > 0){
             barrel2.velocity.x = - 5 
         }
@@ -756,7 +743,7 @@ function rollingBarrelLeft_2(){
 
 function rollingBarrelRight_2() {
     
-    // condition to move left to right
+    // condition to move right
     if (barrel2.x > 0){
         barrel2.velocity.x = +5
     }
@@ -766,7 +753,7 @@ function rollingBarrelRight_2() {
 function rollingBarrelLeft_3(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((barrel3.x + barrel3.width ) > 0){
             barrel3.velocity.x = - 5 
         }
@@ -774,7 +761,7 @@ function rollingBarrelLeft_3(){
 }
 function rollingBarrelRight_3() {
     
-    // condition to move left to right
+    // condition to move right
     if (barrel3.x > 0){
         barrel3.velocity.x = +5
     }
@@ -783,7 +770,7 @@ function rollingBarrelRight_3() {
 function rollingBarrelLeft_4(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((barrel4.x + barrel4.width ) > 0){
             barrel4.velocity.x = - 5 
         }
@@ -791,7 +778,7 @@ function rollingBarrelLeft_4(){
 }
 function rollingBarrelRight_4() {
     
-    // condition to move left to right
+    // condition to right
     if (barrel4.x > 0){
         barrel4.velocity.x = +5
     }
@@ -801,7 +788,7 @@ function rollingBarrelRight_4() {
 function rollingBarrelLeft_5(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((barrel5.x + barrel4.width ) > 0){
             barrel5.velocity.x = - 5 
         }
@@ -819,7 +806,7 @@ function rollingBarrelRight_5() {
 function rollingBarrelLeft_6(){
   
         
-        // condition to move left to left
+        // condition to move left
         if ((barrel6.x + barrel6.width ) > 0){
             barrel6.velocity.x = - 5 
         }
@@ -827,7 +814,7 @@ function rollingBarrelLeft_6(){
 }
 function rollingBarrelRight_6() {
     
-    // condition to move left to right
+    // condition to right
     if (barrel6.x > 0){
         barrel6.velocity.x = +5
     }
@@ -853,19 +840,6 @@ setTimeout(() => {
 }, 10000);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function movementHandler(e){
     console.log("the key that was pressed was: " + e.key);
 
@@ -886,8 +860,7 @@ function movementHandler(e){
 
         
     }
-    // console.log(lord)
-
+   
 }
 
 function movementHandlerOff(e){
