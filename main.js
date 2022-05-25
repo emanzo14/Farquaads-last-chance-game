@@ -25,8 +25,6 @@ ctx.height = map.height;
 
 const gravity = 0.9;
    
-    
-   
 
 
 class Crawler {
@@ -63,11 +61,12 @@ class Crawler {
         
     }
 }
-    class Barrel {
+
+class Barrel {
         constructor(x, y,){
             this.x = x;
             this.y = y;
-            this.color = "yellow";
+            this.color = "green";
             this.height = 32;
             this.width = 32; 
             this.alive = true;
@@ -98,6 +97,7 @@ class Crawler {
     
 
 }
+
 class Platform {
     constructor(x, y, width, height) {
         this.x = x;
@@ -170,6 +170,7 @@ class Object {
 
 let wallLeft = new Object(0, 0, "green", 20 ,1120)
 let wallRight = new Object(798, 0, "green", 20, 960)
+let shrek = new Object(660, 20, "Green", 64, 78) 
 
 
 
@@ -192,7 +193,7 @@ let platform_14 = new Platform(640, 544, 160, 32);
 //Create my players and barrels
 
 let lord = new Crawler(596, 922, "red", 32, 32);
-let lordFart = new Crawler(764, 64, "yellow", 32, 32);
+let lordFart = new Crawler(764, 64, "blue", 32, 32);
 let barrel2 = new Crawler(732, 512, "green", 32, 32 );
 let barrel3 = new Barrel(764, 64);
 let barrel4 = new Barrel(764, 64);
@@ -211,6 +212,7 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
     lord.update();
+    shrek.render(); 
     lordFart.update();
     barrel2.update();
     barrel3.update();
@@ -341,7 +343,20 @@ function mainLoop() {
     platform_14.draw();
     
     barrelLoop();
-    // barrelLoop2();
+    barrelLoop_2();
+    barrelLoop_3();
+    barrelLoop_4();
+    barrelLoop_5();
+    barrelLoop_6();
+
+    
+    if(lord.alive){
+        let hit = hitPlayer(lord, lordFart);
+    }
+
+    if(shrek.alive){
+        let hit = youWin(lord, shrek);
+    }
 
     
     if(lordFart.alive){
@@ -353,6 +368,16 @@ function mainLoop() {
         let hit = hitWallRight(lordFart, wallRight);
 
     };
+
+    // if(barrel3.alive){
+    //     let hit = hitWallLeft(barrel3, wallLeft);
+
+    // };
+
+    // if(barrel3.alive){
+    //     let hit = hitWallRight(barrel3, wallRight);
+
+    // };
   
     
     
@@ -397,10 +422,86 @@ function hitWallRight(p1,p2){
     }   
 }
 // Barrel 2 boolean hit detection
+// function hitWallLeft(p1,p2){
+//     let hitWall =
+
+//         p1.y + p1.height > p2.y &&
+//         p1.y < p2.y + p2.height &&
+//         p1.x + p1.width > p2.x &&
+//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+//     if (hitWall) {
+//         return rollingBarrelRight(barrel3);
+        
+        
+
+//     } else {
+//         return false;
+//     }   
+// }
+// function hitWallRight(p1,p2){
+//     let hitWall =
+
+//         p1.y + p1.height > p2.y &&
+//         p1.y < p2.y + p2.height &&
+//         p1.x + p1.width > p2.x &&
+//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+//     if (hitWall) {
+//         return rollingBarrelLeft(barrel3);
+        
+        
 
 
+//     } else {
+//         return false;
+//     }   
+// }
 
 
+function hitPlayer(p1, p2){
+    let hitBarrel =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitBarrel) {
+
+        lord.alive = false;
+        location.reload();
+        console.log("you died", hitBarrel)
+
+
+    } else {
+        return true;
+    }   
+}
+
+function youWin(p1, p2){
+    let hitShrek =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitShrek) {
+
+        shrek.alive = false;
+        alert("You Win")
+        
+        location.reload();
+       
+        
+        console.log("you win", hitShrek)
+
+
+    } else {
+        return true;
+    }   
+}
 
 
 function barrelLoop() {
@@ -410,12 +511,36 @@ function barrelLoop() {
     }
     
 }
-// function barrelLoop2(){
-//     if (barrel2.y > 1088){
-//         barrel2.y = 532;
-//         barrel2.x = 800;
-//     }
-// }
+function barrelLoop_2(){
+    if (barrel2.y > 1088){
+        barrel2.y = 500;
+        barrel2.x = 800;
+    }
+}
+function barrelLoop_3(){
+    if (barrel3.y > 1088){
+        barrel3.y = 64;
+        barrel3.x = 764;
+    }
+}
+function barrelLoop_4(){
+    if (barrel4.y > 1088){
+        barrel4.y = 64;
+        barrel4.x = 764;
+    }
+}
+function barrelLoop_5(){
+    if (barrel5.y > 1088){
+        barrel5.y = 64;
+        barrel5.x = 764;
+    }
+}
+function barrelLoop_6(){
+    if (barrel6.y > 1088){
+        barrel6.y = 64;
+        barrel6.x = 764;
+    }
+}
 
 
 
@@ -445,16 +570,16 @@ rollingBarrelLeft(barrel2)
 
 setTimeout(() => {
     rollingBarrelLeft(barrel3)
-}, 3000);
+}, 2500);
 setTimeout(() => {
     rollingBarrelLeft(barrel4)
-}, 6000);
+}, 5000);
 setTimeout(() => {
     rollingBarrelLeft(barrel5)
-}, 9000);
+}, 7500);
 setTimeout(() => {
     rollingBarrelLeft(barrel6)
-}, 11000);
+}, 10000);
 
 
 
