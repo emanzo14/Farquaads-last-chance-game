@@ -369,15 +369,52 @@ function mainLoop() {
 
     };
 
-    // if(barrel3.alive){
-    //     let hit = hitWallLeft(barrel3, wallLeft);
+    if(barrel2.alive){
+        let hit = hitWallLeft_2(barrel2, wallLeft);
 
-    // };
+    };
 
-    // if(barrel3.alive){
-    //     let hit = hitWallRight(barrel3, wallRight);
+    if(barrel2.alive){
+        let hit = hitWallRight_2(barrel2, wallRight);
 
-    // };
+    };
+
+    if(barrel3.alive){
+        let hit = hitWallLeft_3(barrel3, wallLeft);
+
+    };
+
+    if(barrel3.alive){
+        let hit = hitWallRight_3(barrel3, wallRight);
+
+    };
+    if(barrel4.alive){
+        let hit = hitWallLeft_4(barrel4, wallLeft);
+
+    };
+
+    if(barrel4.alive){
+        let hit = hitWallRight_4(barrel4, wallRight);
+
+    };
+    if(barrel4.alive){
+        let hit = hitWallLeft_4(barrel4, wallLeft);
+
+    };
+
+    if(barrel5.alive){
+        let hit = hitWallRight_5(barrel5, wallRight);
+
+    };
+    if(barrel5.alive){
+        let hit = hitWallLeft_5(barrel5, wallLeft);
+
+    };
+
+    if(barrel6.alive){
+        let hit = hitWallRight_6(barrel6, wallRight);
+
+    };
   
     
     
@@ -395,7 +432,7 @@ function hitWallLeft(p1,p2){
         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
     if (hitWall) {
-        return rollingBarrelRight(lordFart);
+        return rollingBarrelRight();
         
         
 
@@ -412,7 +449,7 @@ function hitWallRight(p1,p2){
         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
     if (hitWall) {
-        return rollingBarrelLeft(lordFart);
+        return rollingBarrelLeft();
         
         
 
@@ -422,41 +459,185 @@ function hitWallRight(p1,p2){
     }   
 }
 // Barrel 2 boolean hit detection
-// function hitWallLeft(p1,p2){
-//     let hitWall =
+function hitWallLeft_2(p1,p2){
+    let hitWall =
 
-//         p1.y + p1.height > p2.y &&
-//         p1.y < p2.y + p2.height &&
-//         p1.x + p1.width > p2.x &&
-//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
-//     if (hitWall) {
-//         return rollingBarrelRight(barrel3);
+    if (hitWall) {
+        return rollingBarrelRight_2();
         
         
 
-//     } else {
-//         return false;
-//     }   
-// }
-// function hitWallRight(p1,p2){
-//     let hitWall =
+    } else {
+        return false;
+    }   
+}
+function hitWallRight_2(p1,p2){
+    let hitWall =
 
-//         p1.y + p1.height > p2.y &&
-//         p1.y < p2.y + p2.height &&
-//         p1.x + p1.width > p2.x &&
-//         p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
 
-//     if (hitWall) {
-//         return rollingBarrelLeft(barrel3);
+    if (hitWall) {
+        return rollingBarrelLeft_2();
         
         
 
 
-//     } else {
-//         return false;
-//     }   
-// }
+    } else {
+        return false;
+    }   
+}
+
+function hitWallLeft_3(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelRight_3();
+        
+        
+
+    } else {
+        return false;
+    }   
+}
+function hitWallRight_3(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft_3();
+        
+        
+
+
+    } else {
+        return false;
+    }   
+}
+
+function hitWallLeft_4(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelRight_4();
+        
+        
+
+    } else {
+        return false;
+    }   
+}
+function hitWallRight_4(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft_4();
+        
+        
+
+
+    } else {
+        return false;
+    }   
+}
+
+function hitWallLeft_5(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelRight_5();
+        
+        
+
+    } else {
+        return false;
+    }   
+}
+function hitWallRight_5(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft_5();
+        
+        
+
+
+    } else {
+        return false;
+    }   
+}
+
+function hitWallLeft_6(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelRight_6();
+        
+        
+
+    } else {
+        return false;
+    }   
+}
+function hitWallRight_6(p1,p2){
+    let hitWall =
+
+        p1.y + p1.height > p2.y &&
+        p1.y < p2.y + p2.height &&
+        p1.x + p1.width > p2.x &&
+        p1.x < p2.x + p2.width; // {boolean} : if all are true -> hit
+
+    if (hitWall) {
+        return rollingBarrelLeft_6();
+        
+        
+
+
+    } else {
+        return false;
+    }   
+}
 
 
 function hitPlayer(p1, p2){
@@ -544,41 +725,130 @@ function barrelLoop_6(){
 
 
 
-function rollingBarrelLeft(e){
+function rollingBarrelLeft(){
   
         
         // condition to move left to left
-        if ((e.x + e.width ) > 0){
-            e.velocity.x = - 5 
+        if ((lordFart.x + lordFart.width ) > 0){
+            lordFart.velocity.x = - 5 
         }
    
 }
 
-function rollingBarrelRight(e) {
+function rollingBarrelRight() {
     
     // condition to move left to right
-    if (e.x > 0){
-        e.velocity.x = +5
+    if (lordFart.x > 0){
+        lordFart.velocity.x = +5
+    }
+ 
+}
+function rollingBarrelLeft_2(){
+  
+        
+        // condition to move left to left
+        if ((barrel2.x + barrel2.width ) > 0){
+            barrel2.velocity.x = - 5 
+        }
+   
+}
+
+function rollingBarrelRight_2() {
+    
+    // condition to move left to right
+    if (barrel2.x > 0){
+        barrel2.velocity.x = +5
+    }
+ 
+}
+
+function rollingBarrelLeft_3(){
+  
+        
+        // condition to move left to left
+        if ((barrel3.x + barrel3.width ) > 0){
+            barrel3.velocity.x = - 5 
+        }
+   
+}
+function rollingBarrelRight_3() {
+    
+    // condition to move left to right
+    if (barrel3.x > 0){
+        barrel3.velocity.x = +5
+    }
+ 
+}4
+function rollingBarrelLeft_4(){
+  
+        
+        // condition to move left to left
+        if ((barrel4.x + barrel4.width ) > 0){
+            barrel4.velocity.x = - 5 
+        }
+   
+}
+function rollingBarrelRight_4() {
+    
+    // condition to move left to right
+    if (barrel4.x > 0){
+        barrel4.velocity.x = +5
+    }
+ 
+}
+
+function rollingBarrelLeft_5(){
+  
+        
+        // condition to move left to left
+        if ((barrel5.x + barrel4.width ) > 0){
+            barrel5.velocity.x = - 5 
+        }
+   
+}
+function rollingBarrelRight_5() {
+    
+    // condition to move left to right
+    if (barrel5.x > 0){
+        barrel5.velocity.x = +5
+    }
+ 
+}
+
+function rollingBarrelLeft_6(){
+  
+        
+        // condition to move left to left
+        if ((barrel6.x + barrel6.width ) > 0){
+            barrel6.velocity.x = - 5 
+        }
+   
+}
+function rollingBarrelRight_6() {
+    
+    // condition to move left to right
+    if (barrel6.x > 0){
+        barrel6.velocity.x = +5
     }
  
 }
 
 
 
-rollingBarrelLeft(lordFart)
-rollingBarrelLeft(barrel2)
+rollingBarrelLeft()
+rollingBarrelLeft_2()
 
 setTimeout(() => {
-    rollingBarrelLeft(barrel3)
+    rollingBarrelLeft_3(barrel3)
 }, 2500);
 setTimeout(() => {
-    rollingBarrelLeft(barrel4)
+    rollingBarrelLeft_4(barrel4)
 }, 5000);
 setTimeout(() => {
-    rollingBarrelLeft(barrel5)
+    rollingBarrelLeft_5(barrel5)
 }, 7500);
 setTimeout(() => {
-    rollingBarrelLeft(barrel6)
+    rollingBarrelLeft_6(barrel6)
 }, 10000);
 
 
