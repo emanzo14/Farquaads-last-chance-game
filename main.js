@@ -9,47 +9,74 @@ map.setAttribute('height', '1120');
 ctx.width = map.width;
 ctx.height = map.height;
 
+const playerLeft = new Image();
+playerLeft.src ="player_farquaad_left.png";
+playerLeft.onload = loadImages;
+
 const barrelPic = new Image();
 barrelPic.src = "barrel_pic.png";
 barrelPic.onload = loadImages;
 
+const shrekAnimate = new Image();
+shrekAnimate.src = "new-shrek-sprite.png";
+shrekAnimate.onload = loadImages;
+
+const fionaAnimate = new Image();
+fionaAnimate.src = "Princess-Fiona-sprite.png";
+fionaAnimate.onload = loadImages;
+
+const playerAnimate = new Image();
+playerAnimate.src = "player_farquaad2.png";
+playerAnimate.onload = loadImages;
 
 
 
-let numOfImages = 1
+
+let numOfImages = 5
 
 function loadImages() {
-    
+    if(--numOfImages > 0)
+    return;
 };
 
 const gravity = 0.9;
 
    
 class Crawler {
-    constructor(x, y, color, width, height){
+    constructor(x, y){
         this.x = x;
         this.y = y;
-        this.color = color;
-        this.height = height;
-        this.width = width; 
+       
+        this.height = 72;
+        this.width = 46; 
         this.alive = true;
         this.jumping = false;
         this.velocity = {
             x: 0,
             y: 0,
         }
-        
+        this.image = playerLeft
+        this.frames = 0
     }
 
     render() {
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(
+            this.image,
+            28 + this.frames,
+            0,
+            28,
+            45,
+            this.x, 
+            this.y,
+            this.width,
+            this.height)
             
            
     }
     
     update() {
-      
+        this.frames
+        if (this.frames > 4) this.frames = 0;
         this.render();
         this.y += this.velocity.y;
         this.x += this.velocity.x;
@@ -202,7 +229,7 @@ let platform_14 = new Platform(640, 544, 160, 32);
 
 //Create my players and barrels
 
-let player = new Crawler(596, 922, "red", 32, 32);
+let player = new Crawler(596, 922);
 let barrel = new Barrel(764, 64);
 let barrel2 = new Barrel(732, 512);
 let barrel3 = new Barrel(764, 64);
@@ -211,12 +238,7 @@ let barrel5 = new Barrel(764, 64);
 let barrel6 = new Barrel(764, 64);
 
 
-const shrekAnimate = new Image();
-shrekAnimate.src = "new-shrek-sprite.png";
-shrekAnimate.onload = loadImages;
-const fionaAnimate = new Image();
-fionaAnimate.src = "Princess-Fiona-sprite.png";
-fionaAnimate.onload = loadImages;
+
 
 let fionaCols = 11;
 let fionaRows = 1;
@@ -249,12 +271,11 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
 
-        //        image, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight
-    // ctx.drawImage(playerSpriteSheet, srcX, srcY, player_SpriteWidth, player_SpriteHeight, 596, 964, 48, 64);
+      
 
     currentFrame = currentFrame % totalFrames;
     srcX = currentFrame * shrekAnimateWidth;
-    // srcX = currentFrame * player_SpriteWidth
+
 
     ctx.drawImage(shrekAnimate, srcX, srcY, shrekAnimateWidth, shrekAnimateHeight, 660, -20, 100, 150);
 
