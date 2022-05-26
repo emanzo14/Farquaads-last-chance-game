@@ -13,7 +13,7 @@ const playerLeft = new Image();
 playerLeft.src ="player_farquaad_left.png";
 playerLeft.onload = loadImages;
 
-const barrelPic = new Image();
+const barrelPic = new Image(); 
 barrelPic.src = "barrel_pic.png";
 barrelPic.onload = loadImages;
 
@@ -762,11 +762,7 @@ function youWin(p1, p2){
         alert("You Win")
         
         location.reload();
-       
-        
-        console.log("you win", hitShrek)
-
-
+    
     } else {
         return true;
     }   

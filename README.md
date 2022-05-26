@@ -6,12 +6,11 @@ This repo is part of my growing portfolio of projects as I learm the vast world 
 # Farquaads Last Chance Game in Javascript
 
 This game is a representation of the classic arcade game Donkey Kong. The roles are reversed as you play as Lord Farquaad and climb the platforms while you try to dodge the obstacles thrown at you as you try to rescue princess Fiona from the hands of Shrek. You decide does Lord Farquaad gets the princess this time?
-
 ------------------------------------------
 
-# As a user I want To:
-* Build my portfolio of projects as I learn 
-* Bring a fun representation of a classic arcade game 
+# Main objective of the game 
+
+just like the original donkey kong climb the platforms to reach the top without get hit by the falling barrels
 
 
 # problems to takle in this prodject:
