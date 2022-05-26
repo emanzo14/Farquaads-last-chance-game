@@ -9,18 +9,22 @@ map.setAttribute('height', '1120');
 ctx.width = map.width;
 ctx.height = map.height;
 
-// const image = new Image()
-// image.src = './shreks-castle.bmp'
+const barrelPic = new Image();
+barrelPic.src = "barrel_pic.png";
+barrelPic.onload = loadImages;
 
 
-// image.onload = () => {
-//     ctx.drawImage(image,0,0)
-// };
+
+
+let numOfImages = 1
+
+function loadImages() {
+    
+};
 
 const gravity = 0.9;
+
    
-
-
 class Crawler {
     constructor(x, y, color, width, height){
         this.x = x;
@@ -34,23 +38,24 @@ class Crawler {
             x: 0,
             y: 0,
         }
+        
     }
 
     render() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height)
-      
-        
+            
+           
     }
     
     update() {
-        
-        this.render()
+      
+        this.render();
         this.y += this.velocity.y;
-        this.x += this.velocity.x
+        this.x += this.velocity.x;
         if(this.y + this.height + this.velocity.y <= map.height)
         this.velocity.y += gravity;
-        else this.velocity.y = 0
+        else this.velocity.y = 0;
 
         
     }
@@ -60,7 +65,7 @@ class Barrel {
         constructor(x, y,){
             this.x = x;
             this.y = y;
-            this.color = "green";
+            this.color = "blue";
             this.height = 32;
             this.width = 32; 
             this.alive = true;
@@ -68,11 +73,22 @@ class Barrel {
                 x: 0,
                 y: 0,
             }
+            this.image = barrelPic;
         }
     
         render() {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(this.x, this.y, this.width, this.height)
+            ctx.drawImage(
+                this.image,
+                770,
+                0,
+                505,
+                535,
+                this.x,
+                this.y,
+                38,
+                38 
+
+                )
           
             
         }
@@ -96,7 +112,7 @@ class Platform {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
-        this.color = "rgba(0, 0, 255, 0.5)" ;
+        this.color = "rgba(0, 0, 255, 0.0)" ;
         this.width = width;
         this.height = height;
         
@@ -108,13 +124,13 @@ class Platform {
      
     }
     updatePlatformForPlayer(){
-        if (lord.y + lord.height <= this.y && lord.y + lord.height + lord.velocity.y >= this.y && lord.x + lord.width >= this.x && lord.x <= this.x + this.width){
-            lord.velocity.y = 0
+        if (player.y + player.height <= this.y && player.y + player.height + player.velocity.y >= this.y && player.x + player.width >= this.x && player.x <= this.x + this.width){
+            player.velocity.y = 0
         }
     }
     updatePlatformForBarrel(){
-        if (lordFart.y + lordFart.height <= this.y && lordFart.y + lordFart.height + lordFart.velocity.y >= this.y && lordFart.x + lordFart.width >= this.x && lordFart.x <= this.x + this.width){
-            lordFart.velocity.y = 0
+        if (barrel.y + barrel.height <= this.y && barrel.y + barrel.height + barrel.velocity.y >= this.y && barrel.x + barrel.width >= this.x && barrel.x <= this.x + this.width){
+            barrel.velocity.y = 0
         }
     }
     updatePlatformForBarrel2(){
@@ -186,21 +202,84 @@ let platform_14 = new Platform(640, 544, 160, 32);
 
 //Create my players and barrels
 
-let lord = new Crawler(596, 922, "red", 32, 32);
-let lordFart = new Crawler(764, 64, "blue", 32, 32);
-let barrel2 = new Crawler(732, 512, "yellow", 32, 32 );
+let player = new Crawler(596, 922, "red", 32, 32);
+let barrel = new Barrel(764, 64);
+let barrel2 = new Barrel(732, 512);
 let barrel3 = new Barrel(764, 64);
 let barrel4 = new Barrel(764, 64);
 let barrel5 = new Barrel(764, 64);
 let barrel6 = new Barrel(764, 64);
 
 
+const shrekAnimate = new Image();
+shrekAnimate.src = "new-shrek-sprite.png";
+shrekAnimate.onload = loadImages;
+const fionaAnimate = new Image();
+fionaAnimate.src = "Princess-Fiona-sprite.png";
+fionaAnimate.onload = loadImages;
+
+let fionaCols = 11;
+let fionaRows = 1;
+
+let fionaAnimateWidth = fionaAnimate.width / fionaCols;
+let fionaAnimateHeight = fionaAnimate.height / fionaRows;
+
+let fionaTotalFrames = 11;
+let fionaCurrentFrame = 0;
+let fionaFramesDrawn = 0;
+let srcXFiona = 0;
+let srcYFiona = 0;
+
+let columns = 5;
+let rows = 1;
+
+let shrekAnimateWidth = shrekAnimate.width / columns;
+let shrekAnimateHeight = shrekAnimate.height / rows;
+
+let totalFrames = 5;
+let currentFrame = 0;
+
+let srcX = 0;
+let srcY = 0;
+
+let framesDrawn = 0
+
+
 function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
-    lord.update();
-    shrek.render(); 
-    lordFart.update();
+
+        //        image, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight
+    // ctx.drawImage(playerSpriteSheet, srcX, srcY, player_SpriteWidth, player_SpriteHeight, 596, 964, 48, 64);
+
+    currentFrame = currentFrame % totalFrames;
+    srcX = currentFrame * shrekAnimateWidth;
+    // srcX = currentFrame * player_SpriteWidth
+
+    ctx.drawImage(shrekAnimate, srcX, srcY, shrekAnimateWidth, shrekAnimateHeight, 660, -20, 100, 150);
+
+    framesDrawn++;
+    if(framesDrawn >= 10){
+        currentFrame++;
+        framesDrawn = 0;
+    }
+
+
+    ctx.drawImage(fionaAnimate, srcXFiona, srcYFiona, fionaAnimateWidth, fionaAnimateHeight, 600, 40, 38, 64);
+
+    fionaCurrentFrame = fionaCurrentFrame % fionaTotalFrames;
+    srcXFiona = fionaCurrentFrame * fionaAnimateWidth;
+
+    fionaFramesDrawn++;
+    if(fionaFramesDrawn >= 10){
+        fionaCurrentFrame++;
+        fionaFramesDrawn = 0;
+    }
+
+
+    player.update();
+    // shrek.render(); 
+    barrel.update();
     barrel2.update();
     barrel3.update();
     barrel4.update();
@@ -338,39 +417,39 @@ function mainLoop() {
 
 //***** hit conditions for winning and losing *******    
 
-    if(lord.alive){
-        let hit = hitPlayer(lord, lordFart);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel);
     }
-    if(lord.alive){
-        let hit = hitPlayer(lord, barrel2);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel2);
     }
-    if(lord.alive){
-        let hit = hitPlayer(lord, barrel3);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel3);
     }
-    if(lord.alive){
-        let hit = hitPlayer(lord, barrel4);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel4);
     }
-    if(lord.alive){
-        let hit = hitPlayer(lord, barrel5);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel5);
     }
-    if(lord.alive){
-        let hit = hitPlayer(lord, barrel6);
+    if(player.alive){
+        let hit = hitPlayer(player, barrel6);
     }
 
     if(shrek.alive){
-        let hit = youWin(lord, shrek);
+        let hit = youWin(player, shrek);
     }
 
     
 //***** hit conditions for barrels hitting walls *******
 
 //barrel 1
-    if(lordFart.alive){
-        let hit = hitWallLeft(lordFart, wallLeft);
+    if(barrel.alive){
+        let hit = hitWallLeft(barrel, wallLeft);
 
     };
-    if(lordFart.alive){
-        let hit = hitWallRight(lordFart, wallRight);
+    if(barrel.alive){
+        let hit = hitWallRight(barrel, wallRight);
 
     };
 
@@ -639,7 +718,7 @@ function hitPlayer(p1, p2){
 
     if (hitBarrel) {
 
-        lord.alive = false;
+        player.alive = false;
         location.reload();
         console.log("you died", hitBarrel)
 
@@ -674,9 +753,9 @@ function youWin(p1, p2){
 
 
 function barrelLoop() {
-    if (lordFart.y > 1088){
-        lordFart.y = 64;
-        lordFart.x = 764;
+    if (barrel.y > 1088){
+        barrel.y = 64;
+        barrel.x = 764;
     }
     
 }
@@ -717,8 +796,8 @@ function rollingBarrelLeft(){
   
         
         // condition to move left
-        if ((lordFart.x + lordFart.width ) > 0){
-            lordFart.velocity.x = - 5 
+        if ((barrel.x + barrel.width ) > 0){
+            barrel.velocity.x = - 5 
         }
    
 }
@@ -726,8 +805,8 @@ function rollingBarrelLeft(){
 function rollingBarrelRight() {
     
     // condition to move right
-    if (lordFart.x > 0){
-        lordFart.velocity.x = +5
+    if (barrel.x > 0){
+        barrel.velocity.x = +5
     }
  
 }
@@ -771,9 +850,9 @@ function rollingBarrelLeft_4(){
   
         
         // condition to move left
-        if ((barrel4.x + barrel4.width ) > 0){
+    if ((barrel4.x + barrel4.width ) > 0){
             barrel4.velocity.x = - 5 
-        }
+     }
    
 }
 function rollingBarrelRight_4() {
@@ -805,9 +884,8 @@ function rollingBarrelRight_5() {
 
 function rollingBarrelLeft_6(){
   
-        
-        // condition to move left
-        if ((barrel6.x + barrel6.width ) > 0){
+  // condition to move left
+    if ((barrel6.x + barrel6.width ) > 0){
             barrel6.velocity.x = - 5 
         }
    
@@ -845,20 +923,20 @@ function movementHandler(e){
 
     switch (e.key){
         case "a":
-            lord.x > 32 ? lord.velocity.x =- 5 : null;
-         
+            player.x > 32 ? player.velocity.x =- 5 : null;
+            // srcY = 1 * player_SpriteHeight;
+            
+           
             break
         case "d":
-            lord.x < (map.width - 62) ? lord.velocity.x = 5 : null;
-          
+            player.x < (map.width - 62) ? player.velocity.x = 5 : null;
+            // srcY = 0 * player_SpriteHeight;
             break  
         case "w":
-            lord.velocity.y =- 15
+            player.velocity.y =- 15
+            
             break
             
-     
-
-        
     }
    
 }
@@ -868,21 +946,21 @@ function movementHandlerOff(e){
 
     switch (e.key){
         case "d":
-            lord.velocity.x = 0
+            player.velocity.x = 0
          
             break
         case "a":
-            lord.velocity.x = 0
+            player.velocity.x = 0
           
             break  
         case "w":
-            lord.velocity.y = 0
+            player.velocity.y = 0
             
      
 
         
     }
-    console.log(lord)
+    console.log(player)
 
 }
 
