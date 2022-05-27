@@ -29,8 +29,8 @@ const playerAnimate = new Image();
 playerAnimate.src = "player_farquaad2.png";
 playerAnimate.onload = loadImages;
 
-
-
+let audio = new Audio('escape.mp3');
+   
 
 let numOfImages = 5
 
@@ -62,18 +62,7 @@ class Crawler {
     }
 
     render() {
-        ctx.drawImage(
-            this.image,
-            28 + this.frames,
-            0,
-            28,
-            45,
-            this.x, 
-            this.y,
-            this.width,
-            this.height)
-            
-           
+        ctx.drawImage(this.image, 28 + this.frames, 0, 28, 45, this.x, this.y, this.width, this.height)       
     }
     
     update() {
@@ -106,22 +95,9 @@ class Barrel {
         }
     
         render() {
-            ctx.drawImage(
-                this.image,
-                770,
-                0,
-                505,
-                535,
-                this.x,
-                this.y,
-                38,
-                38 
+            ctx.drawImage(this.image, 770, 0, 505, 535, this.x, this.y, 38, 38 )
 
-                )
-          
-            
         }
-        
         update() {
            
             this.render()
@@ -129,9 +105,7 @@ class Barrel {
             this.x += this.velocity.x
             if(this.y + this.height + this.velocity.y <= map.height)
             this.velocity.y += gravity;
-            else this.velocity.y = 0
-    
-            
+            else this.velocity.y = 0 
         }
     
 
@@ -280,7 +254,7 @@ function mainLoop() {
     requestAnimationFrame(mainLoop)
     ctx.clearRect(0, 0, map.width, map. height)
 
-      
+    
 
     currentFrame = currentFrame % totalFrames;
     srcX = currentFrame * shrekAnimateWidth;
@@ -306,6 +280,7 @@ function mainLoop() {
         fionaFramesDrawn = 0;
     }
 
+    
 
     player.update();
     // shrek.render(); 
@@ -541,7 +516,7 @@ function mainLoop() {
 }
 mainLoop();
 //-------------------------------
-//         Functions
+//  Functions/ Hit Detections
 //-------------------------------
 
 // functions to detect wall hit and to declare what is to happen
@@ -771,9 +746,11 @@ function youWin(p1, p2){
     if (hitShrek) {
 
         shrek.alive = false;
+        audio.play();
         alert("You Win")
-        
         location.reload();
+        
+        
     
     } else {
         return true;
