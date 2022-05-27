@@ -12,6 +12,11 @@ This game is a representation of the classic arcade game Donkey Kong. The roles 
 
 just like the original donkey kong climb the platforms to reach the top without get hit by the falling barrels
 
+# controls
+* "W" = Jump
+* "A" = Left
+* "D" = Right
+
 
 # Features I would like to add in the future 
 * Multiple levels

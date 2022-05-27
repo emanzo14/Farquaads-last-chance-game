@@ -41,7 +41,9 @@ function loadImages() {
 
 const gravity = 0.9;
 
-   
+//-------------------------------
+//          Classes
+//-------------------------------
 class Crawler {
     constructor(x, y){
         this.x = x;
@@ -75,8 +77,8 @@ class Crawler {
     }
     
     update() {
-        this.frames
-        if (this.frames > 4) this.frames = 0;
+        // this.frames++
+        // if (this.frames > 4) this.frames = 0;
         this.render();
         this.y += this.velocity.y;
         this.x += this.velocity.x;
@@ -205,6 +207,10 @@ class Object {
     
 }
 
+//-------------------------------
+//          Variables
+//-------------------------------
+
 let wallLeft = new Object(0, 0, "green", 20 ,1120)
 let wallRight = new Object(798, 0, "green", 20, 960)
 let shrek = new Object(660, 20, "Green", 64, 78) 
@@ -266,6 +272,9 @@ let srcY = 0;
 
 let framesDrawn = 0
 
+//-------------------------------
+//          Game Loop
+//-------------------------------
 
 function mainLoop() {
     requestAnimationFrame(mainLoop)
@@ -531,8 +540,11 @@ function mainLoop() {
 
 }
 mainLoop();
+//-------------------------------
+//         Functions
+//-------------------------------
 
-// ********* functions to detect wall hit and to declare what is to happen
+// functions to detect wall hit and to declare what is to happen
 
 
 // Barrel 1 boolean detection 
@@ -934,6 +946,9 @@ setTimeout(() => {
     rollingBarrelLeft_6(barrel6)
 }, 10000);
 
+//-------------------------------
+//     Movmenent Handlers
+//-------------------------------
 
 function movementHandler(e){
     console.log("the key that was pressed was: " + e.key);
@@ -951,6 +966,8 @@ function movementHandler(e){
             break  
         case "w":
             player.velocity.y =- 15
+            
+                
             
             break
             
