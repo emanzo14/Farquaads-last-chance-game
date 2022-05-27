@@ -33,7 +33,7 @@ just like the original donkey kong climb the platforms to reach the top without 
 * Canvas
 
 
-# problems to tackle in this prodject:
+# problems to tackle in this project:
 * bug that allows the character to jump through the platforms
 
 
