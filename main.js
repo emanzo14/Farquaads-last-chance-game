@@ -844,11 +844,7 @@ function rollingBarrelLeft_2(){
         
         // condition to move left
         if ((barrel2.x + barrel2.width ) > 0){
-<<<<<<< HEAD
-            barrel2.velocity.x = - 5.5
-=======
             barrel2.velocity.x = - 5.5 
->>>>>>> main
         }
    
 }
@@ -867,11 +863,7 @@ function rollingBarrelLeft_3(){
         
         // condition to move left
         if ((barrel3.x + barrel3.width ) > 0){
-<<<<<<< HEAD
-            barrel3.velocity.x = - 5.5 
-=======
             barrel3.velocity.x = - 5.5
->>>>>>> main
         }
    
 }
