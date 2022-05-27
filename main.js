@@ -814,7 +814,7 @@ function rollingBarrelLeft(){
         
         // condition to move left
         if ((barrel.x + barrel.width ) > 0){
-            barrel.velocity.x = - 5 
+            barrel.velocity.x = - 5.5
         }
    
 }
@@ -823,7 +823,7 @@ function rollingBarrelRight() {
     
     // condition to move right
     if (barrel.x > 0){
-        barrel.velocity.x = +5
+        barrel.velocity.x = +5.5
     }
  
 }
@@ -832,7 +832,7 @@ function rollingBarrelLeft_2(){
         
         // condition to move left
         if ((barrel2.x + barrel2.width ) > 0){
-            barrel2.velocity.x = - 5 
+            barrel2.velocity.x = - 5.5 
         }
    
 }
@@ -841,7 +841,7 @@ function rollingBarrelRight_2() {
     
     // condition to move right
     if (barrel2.x > 0){
-        barrel2.velocity.x = +5
+        barrel2.velocity.x = +5.5
     }
  
 }
@@ -851,7 +851,7 @@ function rollingBarrelLeft_3(){
         
         // condition to move left
         if ((barrel3.x + barrel3.width ) > 0){
-            barrel3.velocity.x = - 5 
+            barrel3.velocity.x = - 5.5
         }
    
 }
@@ -859,7 +859,7 @@ function rollingBarrelRight_3() {
     
     // condition to move right
     if (barrel3.x > 0){
-        barrel3.velocity.x = +5
+        barrel3.velocity.x = +5.5
     }
  
 }4
@@ -868,7 +868,7 @@ function rollingBarrelLeft_4(){
         
         // condition to move left
     if ((barrel4.x + barrel4.width ) > 0){
-            barrel4.velocity.x = - 5 
+            barrel4.velocity.x = - 5.5 
      }
    
 }
@@ -876,7 +876,7 @@ function rollingBarrelRight_4() {
     
     // condition to right
     if (barrel4.x > 0){
-        barrel4.velocity.x = +5
+        barrel4.velocity.x = +5.5
     }
  
 }
@@ -886,7 +886,7 @@ function rollingBarrelLeft_5(){
         
         // condition to move left
         if ((barrel5.x + barrel4.width ) > 0){
-            barrel5.velocity.x = - 5 
+            barrel5.velocity.x = - 5.5
         }
    
 }
@@ -894,7 +894,7 @@ function rollingBarrelRight_5() {
     
     // condition to move left to right
     if (barrel5.x > 0){
-        barrel5.velocity.x = +5
+        barrel5.velocity.x = +5.5
     }
  
 }
@@ -903,7 +903,7 @@ function rollingBarrelLeft_6(){
   
   // condition to move left
     if ((barrel6.x + barrel6.width ) > 0){
-            barrel6.velocity.x = - 5 
+            barrel6.velocity.x = - 5.5 
         }
    
 }
@@ -911,7 +911,7 @@ function rollingBarrelRight_6() {
     
     // condition to right
     if (barrel6.x > 0){
-        barrel6.velocity.x = +5
+        barrel6.velocity.x = +5.5
     }
  
 }
