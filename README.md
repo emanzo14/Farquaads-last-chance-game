@@ -23,6 +23,7 @@ just like the original donkey kong climb the platforms to reach the top without 
 * More challenging difficulties
 * Better animation for the character 
 * Add sound effects
+* Add end game screen/button
 
 
 # Technologies Used:
